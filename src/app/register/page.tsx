@@ -11,11 +11,25 @@ export default function Page() {
 
   return (
     <div className="h-full w-full flex flex-col justify-center items-center">
-      <h1 className="text-5xl mb-10">Se connecter</h1>
+      <h1 className="text-5xl mb-10">S&apos;enregistrer</h1>
       <form
         className="flex flex-col items-center space-y-4 w-1/3"
         onSubmit={handleSubmit(onSubmit)}
       >
+        <Controller
+          name="firstname"
+          control={control}
+          render={({ field }) => (
+            <Input required label="Prénom" type="text" {...field} />
+          )}
+        />
+        <Controller
+          name="lastname"
+          control={control}
+          render={({ field }) => (
+            <Input required label="Nom" type="text" {...field} />
+          )}
+        />
         <Controller
           name="email"
           control={control}
@@ -30,7 +44,7 @@ export default function Page() {
             <Input required label="Mot de passe" type="password" {...field} />
           )}
         />
-        <Button>Se connecter</Button>
+        <Button>S&apos;enregistrer</Button>
       </form>
     </div>
   );
