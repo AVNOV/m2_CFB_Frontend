@@ -1,4 +1,5 @@
 'use client';
+import { login } from '../../../slices/auth.slice';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
@@ -6,7 +7,7 @@ import { Controller, FieldValues, useForm } from 'react-hook-form';
 export default function Page() {
   const { handleSubmit, control } = useForm();
   const onSubmit = (data: FieldValues) => {
-    console.log(data);
+    login(data);
   };
 
   return (
