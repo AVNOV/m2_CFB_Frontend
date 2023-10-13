@@ -5,7 +5,7 @@ import Button from '../components/Button';
 import Input from '../components/Input';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../../store';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { loginRequest } from '../../../api/query/user.query';
 
 export default function Page() {
