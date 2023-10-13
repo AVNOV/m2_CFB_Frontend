@@ -1,14 +1,33 @@
 'use client';
+import { useState } from 'react';
 import { login } from '../../../slices/auth.slice';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
+import { useAppDispatch } from '../../../store';
+import { useRouter } from 'next/router';
+import { loginRequest } from '../../../api/query/user.query';
 
 export default function Page() {
-  const { handleSubmit, control } = useForm();
-  const onSubmit = (data: FieldValues) => {
-    login(data);
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [error, setError] = useState('');
+
+  const onSubmit = async (data: FieldValues) => {
+    try {
+      const response = await loginRequest(data.email, data.password);
+      dispatch(
+        login({ user: response.user, access_token: response.access_token }),
+      );
+      setError('');
+      router.push('/');
+    } catch (error: any) {
+      console.error(error);
+      setError('Erreur, vérifiez votre email et/ou votre mot de passe.');
+    }
   };
+  const { handleSubmit, control } = useForm();
 
   return (
     <div className="h-full w-full flex flex-col justify-center items-center">
