@@ -11,7 +11,8 @@ type props = {
   disabled?: boolean;
 };
 
-const Input = forwardRef((props: props) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Input = forwardRef((props: props, ref) => {
   return (
     <div className="w-full">
       <label className="block mb-0.5">{props.label} :</label>
