@@ -1,4 +1,6 @@
 'use client';
+import { createUser } from '../../../api/query/user.query';
+import { CreateUserType } from '../../../types/CreateUserType';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
@@ -6,7 +8,7 @@ import { Controller, FieldValues, useForm } from 'react-hook-form';
 export default function Page() {
   const { handleSubmit, control } = useForm();
   const onSubmit = (data: FieldValues) => {
-    console.log(data);
+    createUser(data as CreateUserType);
   };
 
   return (
