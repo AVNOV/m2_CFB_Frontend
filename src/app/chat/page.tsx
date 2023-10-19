@@ -1,40 +1,51 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
+import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:3001');
-
-const Index = () => {
-  const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState('');
+const ChatComponent: React.FC = () => {
+  const [messages, setMessages] = useState<string[]>([]);
+  const [message, setMessage] = useState<string>('');
+  const socket = io('http://localhost:3000');
 
   useEffect(() => {
-    socket.on('chat message', (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
+    socket.on('message', (data: string) => {
+      setMessages((prevMessages) => [...prevMessages, data]);
     });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
-  const sendMessage = () => {
-    socket.emit('chat message', newMessage);
-    setNewMessage('');
+  const handleSendMessage = () => {
+    if (message) {
+      socket.emit('message', message);
+      setMessage('');
+    }
   };
 
   return (
     <div>
-      <h1>Real-Time Chat</h1>
-      <div>
-        {messages.map((message, index) => (
-          <div key={index}>{message}</div>
-        ))}
+      <h1>Chat en temps réel</h1>
+      <div className="chat-box">
+        <ul>
+          {messages.map((msg, index) => (
+            <li key={index}>{msg}</li>
+          ))}
+        </ul>
       </div>
-      <input
-        type="text"
-        value={newMessage}
-        onChange={(e) => setNewMessage(e.target.value)}
-      />
-      <button onClick={sendMessage}>Send</button>
+      <div className="input-box">
+        <input
+          type="text"
+          placeholder="Tapez votre message"
+          className="text-black"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+        <button onClick={handleSendMessage}>Envoyer</button>
+      </div>
     </div>
   );
 };
 
-export default Index;
+export default ChatComponent;
