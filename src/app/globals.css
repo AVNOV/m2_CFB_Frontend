@@ -12,7 +12,7 @@ body {
 .dots-bars-4 {
   width: 100px;
   height: 40px;
-  margin-left: 120px;
+  margin: 0 auto;
   --c:radial-gradient(farthest-side,currentColor 93%,#0000);
   color: orange;
   background:
