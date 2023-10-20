@@ -1,3 +1,4 @@
+'use client';
 import { configureStore } from '@reduxjs/toolkit';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import auth from '../slices/auth.slice';
