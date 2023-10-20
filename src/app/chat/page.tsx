@@ -5,7 +5,7 @@ import { io } from 'socket.io-client';
 const ChatComponent: React.FC = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [message, setMessage] = useState<string>('');
-  const socket = io('http://localhost:3000');
+  const socket = io('http://localhost:5555');
 
   useEffect(() => {
     socket.on('message', (data: string) => {
