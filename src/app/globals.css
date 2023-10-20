@@ -8,3 +8,37 @@ body {
   background: linear-gradient(to bottom, #2e4867, #132a45);
   color: white;
 }
+
+.dots-bars-4 {
+  width: 100px;
+  height: 40px;
+  margin-left: 120px;
+  --c:radial-gradient(farthest-side,currentColor 93%,#0000);
+  color: orange;
+  background:
+    var(--c) 0    0,
+    var(--c) 50%  0,
+    var(--c) 100% 0;
+  background-size:18px 18px;
+  background-repeat: no-repeat;
+  position: relative;
+  animation: db4-0 1s linear infinite alternate;
+}
+
+@keyframes db4-0 {
+  0%      {background-position: 0  100%,50% 0   ,100% 0}
+  8%,42%  {background-position: 0  0   ,50% 0   ,100% 0}
+  50%     {background-position: 0  0   ,50% 100%,100% 0}
+  58%,92% {background-position: 0  0   ,50% 0   ,100% 0}
+  100%    {background-position: 0  0   ,50% 0   ,100% 100%}
+}
+
+@keyframes db4-1 {
+  100% {left:calc(100% - 8px)}
+}
+
+@keyframes db4-2 {
+  100% {top:-0.1px}
+}
+
+
