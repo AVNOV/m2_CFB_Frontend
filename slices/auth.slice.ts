@@ -5,15 +5,19 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: {
     isLogged: false,
-    user: {
-      id: -1,
-      firstname: '',
-      lastname: '',
-      email: '',
-      created_at: '',
-      updated_at: '',
-    },
-    access_token: '',
+    user: localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user')!)
+      : {
+          id: -1,
+          firstname: '',
+          lastname: '',
+          email: '',
+          created_at: '',
+          updated_at: '',
+        },
+    access_token: localStorage.getItem('access_token')
+      ? localStorage.getItem('access_token')
+      : '',
   },
   reducers: {
     update: (state, action) => {
