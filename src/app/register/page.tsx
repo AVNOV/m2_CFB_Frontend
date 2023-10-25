@@ -1,4 +1,6 @@
 'use client';
+
+import { useRouter } from 'next/navigation';
 import { createUser } from '../../../api/query/user.query';
 import { CreateUserType } from '../../../types/CreateUserType';
 import Button from '../components/Button';
@@ -6,9 +8,11 @@ import Input from '../components/Input';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
 
 export default function Page() {
+  const router = useRouter();
   const { handleSubmit, control } = useForm();
   const onSubmit = (data: FieldValues) => {
     createUser(data as CreateUserType);
+    router.push('/login');
   };
 
   return (
