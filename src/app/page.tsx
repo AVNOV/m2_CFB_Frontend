@@ -55,7 +55,7 @@ export default function Home() {
                 className="flex bg-white rounded-t-md justify-center text-black py-2 hover:bg-slate-300 transition-colors"
                 href="profile"
               >
-                Profile
+                Profil
               </a>
               <div
                 onClick={onLogout}
