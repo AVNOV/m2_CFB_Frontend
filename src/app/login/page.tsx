@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useContext } from 'react';
 import { login } from '../../../slices/auth.slice';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -7,12 +7,12 @@ import { Controller, FieldValues, useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../../store';
 import { useRouter } from 'next/navigation';
 import { loginRequest } from '../../../api/query/user.query';
+import { ToastContext } from '../layout';
 
 export default function Page() {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [error, setError] = useState('');
+  const context = useContext(ToastContext);
 
   const onSubmit = async (data: FieldValues) => {
     try {
@@ -20,11 +20,11 @@ export default function Page() {
       dispatch(
         login({ user: response.user, access_token: response.access_token }),
       );
-      setError('');
+      context.toast.dismiss();
       router.push('/');
     } catch (error: any) {
       console.error(error);
-      setError('Erreur, vérifiez votre email et/ou votre mot de passe.');
+      context.toast.error(error.response.data.message);
     }
   };
   const { handleSubmit, control } = useForm();
@@ -50,6 +50,10 @@ export default function Page() {
             <Input required label="Mot de passe" type="password" {...field} />
           )}
         />
+        <a href="/register">
+          Vous n&apos;avez pas de compte ?{' '}
+          <span className="underline">Cliquez ici</span>
+        </a>
         <Button>Se connecter</Button>
       </form>
     </div>

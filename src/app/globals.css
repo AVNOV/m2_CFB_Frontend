@@ -9,6 +9,40 @@ body {
   color: white;
 }
 
+@keyframes orbite {
+  0% {
+    transform: rotate(0deg) translateX(-250%);
+  }
+  100% {
+    transform: rotate(360deg) translateX(0%);
+  }
+}
+
+@keyframes fade-in-animation {
+  0% {
+    opacity: 0;
+    transform: translateY(5%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rocket {
+  position: absolute;
+  height: 20%;
+  width: 20%;
+  bottom: -20%;
+  left: 50%;
+  object-fit: contain;
+  animation: orbite 10s linear infinite;
+}
+
+.fade-in {
+  animation: fade-in-animation 1s ease-in;
+}
+
 .dots-bars-4 {
   width: 100px;
   height: 40px;
@@ -40,5 +74,8 @@ body {
 @keyframes db4-2 {
   100% {top:-0.1px}
 }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 0f0e9a6a12f75d8d45c979ba5008c745b7cc29a2

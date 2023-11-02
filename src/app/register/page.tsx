@@ -1,14 +1,27 @@
 'use client';
+import { useContext } from 'react';
 import { createUser } from '../../../api/query/user.query';
 import { CreateUserType } from '../../../types/CreateUserType';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
+import { ToastContext } from '../layout';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
+  const router = useRouter();
   const { handleSubmit, control } = useForm();
-  const onSubmit = (data: FieldValues) => {
-    createUser(data as CreateUserType);
+  const context = useContext(ToastContext);
+
+  const onSubmit = async (data: FieldValues) => {
+    try {
+      await createUser(data as CreateUserType);
+      context.toast.success('Votre compte a été créé avec succès');
+      router.push('/login');
+    } catch (error: any) {
+      console.error(error);
+      context.toast.error('Problème lors de la création de votre comte');
+    }
   };
 
   return (
@@ -46,6 +59,10 @@ export default function Page() {
             <Input required label="Mot de passe" type="password" {...field} />
           )}
         />
+        <a href="/login">
+          Vous avez déjà un compte ?{' '}
+          <span className="underline">Cliquez ici</span>
+        </a>
         <Button>S&apos;enregistrer</Button>
       </form>
     </div>
