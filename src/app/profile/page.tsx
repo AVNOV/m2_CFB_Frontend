@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 export default function Page() {
   const router = useRouter();
   const user = useAppSelector((state) => state.auth.user);
+  console.log(user);
 
   return (
     <div className="h-full w-full flex flex-col pt-5">
@@ -21,10 +22,19 @@ export default function Page() {
       <div className="flex flex-col my-auto justify-center items-center">
         <h1 className="text-5xl mb-10">Mes informations</h1>
         <div className="flex flex-col items-center space-y-4 w-1/3">
-          <p>
-            {user.firstname} {user.lastname}
-          </p>
-          <p>{user.email}</p>
+          {user.firstname === '' ? (
+            <>
+              <p>Chargement</p>
+              <div className="dots-bars-4"></div>
+            </>
+          ) : (
+            <>
+              <p className="text-lg">
+                {user.firstname} {user.lastname}
+              </p>
+              <p className="text-lg">{user.email}</p>
+            </>
+          )}
         </div>
       </div>
     </div>
