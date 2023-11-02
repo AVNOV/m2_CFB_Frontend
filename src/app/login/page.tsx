@@ -24,7 +24,7 @@ export default function Page() {
       router.push('/');
     } catch (error: any) {
       console.error(error);
-      context.toast.error('Vérifiez votre email et/ou votre mot de passe.');
+      context.toast.error(error.response.data.message);
     }
   };
   const { handleSubmit, control } = useForm();
