@@ -1,12 +1,11 @@
 'use client';
 import { useState } from 'react';
-import Button from '../components/Button';
 import './card.css';
 
 const items = [
-  { id: 1, text: 'Premier élément de texte' },
-  { id: 2, text: 'Deuxième élément de texte' },
-  { id: 3, text: 'Troisième élément de texte' },
+  { id: 1, text: 'Thème 1' },
+  { id: 2, text: 'Thème 2' },
+  { id: 3, text: 'Thème 3' },
 ];
 
 export default function Carousel() {
@@ -25,7 +24,7 @@ export default function Carousel() {
     if (selectedItemId === null) {
       return;
     }
-    alert(`ID sélectionné : ${selectedItemId}`);
+    console.log('ID theme', selectedItemId);
   };
 
   return (
@@ -38,7 +37,13 @@ export default function Carousel() {
           <div className="mr-0.5">&#9664;</div>
         </button>
         <div className="overflow-hidden">
-          <div className="card" onClick={handleValidation}>
+          <div
+            className="card"
+            onClick={() => {
+              setSelectedItemId(items[currentIndex].id);
+              handleValidation();
+            }}
+          >
             <div className="card-content">
               <p className="card-title">{items[currentIndex].text}</p>
             </div>
