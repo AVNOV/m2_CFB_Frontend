@@ -1,20 +1,20 @@
 describe('', () => {
   it('Viste le site', () => {
-    cy.visit('http://localhost:3000');
+    cy.visit('/');
     cy.contains('Quizziky').should('be.visible');
   });
 });
 
 describe('Page de connexion', () => {
   it('Affiche la page de connexion', () => {
-    cy.visit('http://localhost:3000');
+    cy.visit('/');
     cy.contains('Se connecter').click();
     cy.url().should('include', '/login');
     cy.contains('Se connecter').should('be.visible');
   });
 
   beforeEach(() => {
-    cy.visit('localhost:3000/login');
+    cy.visit('/login');
   });
 
   it('Permet de se connecter avec des identifiants valides', () => {
