@@ -1,4 +1,4 @@
-import { QuizType } from 'types/QuizTypes';
+import { QuizType } from './QuizTypes';
 
 export type GameType = {
   id: number;
