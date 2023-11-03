@@ -30,9 +30,23 @@ export default function Page() {
           ) : (
             <>
               <p className="text-lg">
-                {user.firstname} {user.lastname}
+                prénom:{' '}
+                <span data-test="firstname" className="text-base">
+                  {user.firstname}
+                </span>
               </p>
-              <p className="text-lg">{user.email}</p>
+              <p className="text-lg">
+                nom:{' '}
+                <span data-test="lastname" className="text-base">
+                  {user.lastname}
+                </span>
+              </p>
+              <p className="text-lg">
+                email:{' '}
+                <span data-test="email" className="text-base">
+                  {user.email}
+                </span>
+              </p>
             </>
           )}
         </div>
