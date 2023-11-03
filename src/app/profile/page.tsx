@@ -4,11 +4,11 @@ import Image from 'next/image';
 import { useAppSelector } from '../../../store';
 import arrow from '@/assets/icons/arrow.svg';
 import { useRouter } from 'next/navigation';
+import { UserType } from 'types/UserTypes';
 
 export default function Page() {
   const router = useRouter();
-  const user = useAppSelector((state) => state.auth.user);
-  console.log(user);
+  const user: UserType = useAppSelector((state) => state.auth.user);
 
   return (
     <div className="h-full w-full flex flex-col pt-5">
