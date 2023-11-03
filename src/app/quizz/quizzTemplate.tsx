@@ -62,7 +62,7 @@ export default function QuizzTemplate(TemplateProps: TemplateProps) {
         </div>
       </div>
       <div className="mt-[10vh]">
-        <Button onClick={handleValidate}>La grande chatte</Button>
+        <Button onClick={handleValidate}>Quizz IT</Button>
       </div>
     </div>
   );
