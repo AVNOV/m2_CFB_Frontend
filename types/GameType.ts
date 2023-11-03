@@ -1,4 +1,4 @@
-import { QuizzType } from 'types/Quizz/QuizzType';
+import { QuizType } from 'types/QuizType';
 import { UserType } from 'types/User/UserType';
 
 export type GameType = {
@@ -6,6 +6,6 @@ export type GameType = {
   numberCorrectAnswers: number;
   numberQuestions: number;
   quizzId: number;
-  quizz: QuizzType;
+  quizz: QuizType;
   user: UserType[];
 };
