@@ -6,7 +6,15 @@ describe('<Input />', () => {
     const name: string = 'test';
     const label: string = 'test';
     const type: string = 'text';
-    cy.mount(<Input name={name} label={label} type={type} value={value} />);
+    cy.mount(
+      <Input
+        name={name}
+        label={label}
+        type={type}
+        value={value}
+        onChange={() => {}}
+      />,
+    );
 
     cy.get('input').should('exist');
 
@@ -18,7 +26,14 @@ describe('<Input />', () => {
 
     cy.get('input').click().should('be.focused');
     cy.mount(
-      <Input name={name} label={label} type={type} value={value} disabled />,
+      <Input
+        name={name}
+        label={label}
+        type={type}
+        value={value}
+        disabled
+        onChange={() => {}}
+      />,
     );
     cy.get('input').should('be.disabled');
   });
