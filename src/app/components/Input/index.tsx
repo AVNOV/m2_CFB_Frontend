@@ -15,7 +15,6 @@ type props = {
 const Input = forwardRef((props: props, ref) => {
   return (
     <div className="w-full">
-      <label className="block mb-0.5">{props.label} :</label>
       <input
         className="border-2 focus:outline-orange-400 border-grey rounded-lg w-full py-2 px-3 leading-tight border-solid bg-white text-black"
         required={props.required}
