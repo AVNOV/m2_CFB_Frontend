@@ -1,5 +1,5 @@
-import API from 'api/API';
-import { CreateGameType, GameType } from 'types/GameTypes';
+import API from '../API';
+import { CreateGameType, GameType } from '../../types/GameTypes';
 
 export const getGame = async (gameId: string) => {
   const data: GameType = await API.get(`/game/${gameId}`);
