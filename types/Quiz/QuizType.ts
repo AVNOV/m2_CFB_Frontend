@@ -2,7 +2,7 @@ import { GameType } from 'types/Game/GameType';
 import { QuestionType } from 'types/Question/QuestionType';
 import { UserType } from 'types/User/UserType';
 
-export type QuizzType = {
+export type QuizType = {
   id: number;
   title: string;
   difficulty: number;

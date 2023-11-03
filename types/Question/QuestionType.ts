@@ -1,9 +1,9 @@
 import { AnswerType } from 'types/Answer/AnswerType';
-import { QuizzType } from 'types/Quizz/QuizzType';
+import { QuizType } from 'types/Quiz/QuizType';
 
 export type QuestionType = {
   id: number;
   title: string;
-  quizz: QuizzType[];
+  quizzes: QuizType[];
   answers: AnswerType[];
 };

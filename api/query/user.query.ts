@@ -17,7 +17,7 @@ export const createUser = async (user: CreateUserType) => {
   return data;
 };
 
-export const getUser = async () => {
-  const data: UserType = await API.get('/user');
+export const getUser = async (userId: string) => {
+  const data: UserType = await API.get(`/user/${userId}`);
   return data;
 };
