@@ -4,7 +4,7 @@ describe('Page de connexion', () => {
   const email: string = 'test@test.com';
   const firstname: string = 'test';
   const lastname: string = 'test';
-  before('Acces au store', () => {
+  it('Acces au store', () => {
     cy.visit('/');
     cy.window()
       .its('Cypress')
@@ -12,7 +12,6 @@ describe('Page de connexion', () => {
       .invoke(
         'dispatch',
         login({
-          access_token: 'access_token_test',
           user: {
             firstname: firstname,
             lastname: lastname,
@@ -22,6 +21,20 @@ describe('Page de connexion', () => {
       );
   });
   it('Affiche la page de connexion', () => {
+    cy.visit('/');
+    cy.window()
+      .its('Cypress')
+      .its('store')
+      .invoke(
+        'dispatch',
+        login({
+          user: {
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+          },
+        }),
+      );
     cy.contains('test').click();
     cy.contains('Profil').click();
     cy.url().should('include', '/profile');
