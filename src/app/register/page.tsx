@@ -1,5 +1,5 @@
 'use client';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { createUser } from '../../../api/query/user.query';
 import { CreateUserType } from '../../../types/UserTypes';
 import Button from '../components/Button';

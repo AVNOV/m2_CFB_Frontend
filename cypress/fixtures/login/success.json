@@ -1,0 +1,9 @@
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpdsVCJ9.eyJpZCI6MSwiZW1haWwiOiJqb2pvQGpvam8uY29tIiwiZmlyc3RuYW1lIjoiSk9KTyIsImxhc3RuYW1lIjoiSm9qbyIsImlhdCI6MTY5OTAwNDIzOCwiZXhwIjoxNjk5MDkwNjM4fQ.PAGmRulblk_a7525t4LjGTBBn84tgFSO-paOzJvw4IY",
+  "user": {
+    "id": 1,
+    "email": "test@test.com",
+    "firstname": "test",
+    "lastname": "test"
+  }
+}
