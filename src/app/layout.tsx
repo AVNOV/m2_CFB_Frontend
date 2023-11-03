@@ -23,7 +23,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [modal, setModal] = useState(false);
-  console.log(modal);
 
   useEffect(() => {
     let keyPressed = false;
