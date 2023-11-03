@@ -1,3 +1,4 @@
+import { QuestionType } from 'types/Question/QuestionType';
 import { UserType } from 'types/User/UserType';
 
 export type QuizzType = {
