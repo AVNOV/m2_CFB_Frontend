@@ -1,5 +1,5 @@
-import { AnswerType } from 'types/AnswerType';
-import { QuizType } from 'types/QuizType';
+import { AnswerType } from 'types/AnswerTypes';
+import { QuizType } from 'types/QuizTypes';
 
 export type QuestionType = {
   id: number;

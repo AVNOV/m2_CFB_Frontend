@@ -1,7 +1,7 @@
 'use client';
 import { useContext } from 'react';
 import { createUser } from '../../../api/query/user.query';
-import { CreateUserType } from '../../../types/User/CreateUserType';
+import { CreateUserType } from '../../../types/CreateUserType';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import { Controller, FieldValues, useForm } from 'react-hook-form';

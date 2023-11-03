@@ -1,5 +1,5 @@
 import API from 'api/API';
-import { QuizType } from 'types/QuizType';
+import { QuizType } from 'types/QuizTypes';
 
 export const getQuiz = async (quizId: string) => {
   const data: QuizType = await API.get(`/quiz/${quizId}`);
