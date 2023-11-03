@@ -1,5 +1,7 @@
 'use client';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import Button from '../components/Button';
+import './card.css';
 
 const items = [
   { id: 1, text: 'Premier élément de texte' },
@@ -7,8 +9,9 @@ const items = [
   { id: 3, text: 'Troisième élément de texte' },
 ];
 
-const Carousel: React.FC = () => {
+export default function Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
 
   const nextItem = () => {
     setCurrentIndex((currentIndex + 1) % items.length);
@@ -18,29 +21,39 @@ const Carousel: React.FC = () => {
     setCurrentIndex((currentIndex - 1 + items.length) % items.length);
   };
 
+  const handleValidation = () => {
+    if (selectedItemId === null) {
+      return;
+    }
+    alert(`ID sélectionné : ${selectedItemId}`);
+  };
+
   return (
-    <div className="relative w-full max-w-xl mx-auto">
-      <div className="relative overflow-hidden">
-        <div className="w-full h-auto">
-          <p className="text-2xl font-bold p-4 text-center">
-            {items[currentIndex].text}
-          </p>
+    <div className="flex flex-col w-full h-full items-center justify-center">
+      <div className="w-full flex items-center justify-center">
+        <button
+          className="mr-5 w-10 h-10 bg-gray-800 text-white p-2 rounded-full shadow-md hover:bg-gray-700"
+          onClick={prevItem}
+        >
+          <div className="mr-0.5">&#9664;</div>
+        </button>
+        <div className="overflow-hidden">
+          <div className="card" onClick={handleValidation}>
+            <div className="card-content">
+              <p className="card-title">{items[currentIndex].text}</p>
+            </div>
+          </div>
         </div>
+        <button
+          className="ml-5 w-10 h-10 bg-gray-800 text-white p-2 rounded-full shadow-md hover:bg-gray-700"
+          onClick={nextItem}
+        >
+          <div className="ml-0.5">&#9654;</div>
+        </button>
       </div>
-      <button
-        className="absolute w-10 h-10 top-1/2 transform -translate-y-1/2 left-4 bg-gray-800 text-white p-2 rounded-full shadow-md hover:bg-gray-700"
-        onClick={prevItem}
-      >
-        <div className="mr-0.5">&#9664;</div>
-      </button>
-      <button
-        className="absolute w-10 h-10 top-1/2 transform -translate-y-1/2 right-4 bg-gray-800 text-white p-2 rounded-full shadow-md hover:bg-gray-700"
-        onClick={nextItem}
-      >
-        <div className="ml-0.5">&#9654;</div>
-      </button>
+      {/* <Button className="mt-4" onClick={handleValidation}>
+        Valider
+      </Button> */}
     </div>
   );
-};
-
-export default Carousel;
+}
