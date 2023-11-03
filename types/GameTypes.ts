@@ -1,16 +1,15 @@
 import { QuizType } from 'types/QuizTypes';
-import { UserType } from 'types/UserTypes';
 
 export type GameType = {
   id: number;
   numberCorrectAnswers: number;
-  numberQuestions: number;
-  quizzId: number;
-  quizz: QuizType;
-  user: UserType[];
+  numberAnswers: number;
+  quizId: number;
+  quiz: QuizType;
+  userId: string[];
 };
 
 export type CreateGameType = {
-  quizzId: number;
-  user: UserType[];
+  quizId: number;
+  userId: string[];
 };
