@@ -1,0 +1,9 @@
+{
+  "firstname": "test",
+  "lastname": "test",
+  "email": "test@test.com",
+  "password": "$2b$10$gyEBz8n.If98NFM0NbZBKeb1sPbiGUeH6qlMzTH4KZZggOZGgF/j2",
+  "id": 1,
+  "updated_at": "2023-11-03T12:39:39.000Z",
+  "created_at": "2023-11-03T12:39:39.000Z"
+}

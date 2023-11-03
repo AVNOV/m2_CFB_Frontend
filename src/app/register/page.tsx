@@ -20,7 +20,7 @@ export default function Page() {
       router.push('/login');
     } catch (error: any) {
       console.error(error);
-      context.toast.error('Problème lors de la création de votre comte');
+      context.toast.error('Problème lors de la création de votre compte');
     }
   };
 
@@ -35,14 +35,26 @@ export default function Page() {
           name="firstname"
           control={control}
           render={({ field }) => (
-            <Input required label="Prénom" type="text" {...field} />
+            <Input
+              data-test="firstname"
+              required
+              label="Prénom"
+              type="text"
+              {...field}
+            />
           )}
         />
         <Controller
           name="lastname"
           control={control}
           render={({ field }) => (
-            <Input required label="Nom" type="text" {...field} />
+            <Input
+              data-test="lastname"
+              required
+              label="Nom"
+              type="text"
+              {...field}
+            />
           )}
         />
         <Controller

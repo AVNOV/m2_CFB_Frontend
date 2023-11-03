@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 
 type props = {
+  'data-test'?: string;
   name: string;
   label: string;
   type: string;
@@ -16,6 +17,7 @@ const Input = forwardRef((props: props, ref) => {
   return (
     <div className="w-full">
       <input
+        data-test={props['data-test']}
         className="border-2 focus:outline-orange-400 border-grey rounded-lg w-full py-2 px-3 leading-tight border-solid bg-white text-black"
         required={props.required}
         id={props.name}
