@@ -1,5 +1,5 @@
 import API from '../API';
-import { CreateUserType } from '../../types/CreateUserType';
+import { CreateUserType } from '../../types/User/CreateUserType';
 
 export const loginRequest = async (email: string, password: string) => {
   const { data } = await API.post('/login', { email, password });
