@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useAppSelector } from '../../../store';
 import arrow from '@/assets/icons/arrow.svg';
 import { useRouter } from 'next/navigation';
-import { UserType } from 'types/UserTypes';
+import { UserType } from '../../../types/UserTypes';
 
 export default function Page() {
   const router = useRouter();
