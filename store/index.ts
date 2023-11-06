@@ -16,3 +16,17 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 export default store;
+
+declare global {
+  interface Window {
+    Cypress?: CypressWithStore;
+  }
+}
+
+interface CypressWithStore extends Cypress.Cypress {
+  store?: typeof store;
+}
+
+if (typeof window !== 'undefined' && window.Cypress) {
+  window.Cypress.store = store;
+}

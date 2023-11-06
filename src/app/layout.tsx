@@ -11,7 +11,7 @@ import { createContext, useEffect } from 'react';
 import { useState } from 'react';
 import Modal from './components/Modal';
 
-const inter = Lilita_One({ subsets: ['latin'], weight: '400' });
+const inter = Lilita_One({ subsets: ['latin'], weight: ['400'] });
 
 const client = new QueryClient();
 
@@ -23,7 +23,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [modal, setModal] = useState(false);
-  console.log(modal);
 
   useEffect(() => {
     let keyPressed = false;
