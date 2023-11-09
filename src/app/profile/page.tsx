@@ -3,22 +3,17 @@
 import Image from 'next/image';
 import { useAppSelector } from '../../../store';
 import arrow from '@/assets/icons/arrow.svg';
-import { useRouter } from 'next/navigation';
 import { UserType } from '../../../types/UserTypes';
+import Link from 'next/link';
 
 export default function Page() {
-  const router = useRouter();
   const user: UserType = useAppSelector((state) => state.auth.user);
 
   return (
     <div className="h-full w-full flex flex-col pt-5">
-      <div className="flex cursor-pointer" onClick={() => router.push('/')}>
-        <Image
-          className="w-4 object-contain ml-2 rotate-90"
-          src={arrow}
-          alt=""
-        />
-      </div>
+      <Link href="/" className="ml-2 w-4 transition-transform active:scale-95">
+        <Image className="object-contain rotate-90" src={arrow} alt="" />
+      </Link>
       <div className="flex flex-col my-auto justify-center items-center">
         <h1 className="text-5xl mb-10">Mes informations</h1>
         <div className="flex flex-col items-center space-y-4 w-1/3">

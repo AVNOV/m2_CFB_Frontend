@@ -7,6 +7,7 @@ import Input from '../components/Input';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
 import { ToastContext } from '../layout';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function Page() {
   const router = useRouter();
@@ -71,10 +72,10 @@ export default function Page() {
             <Input required label="Mot de passe" type="password" {...field} />
           )}
         />
-        <a href="/login">
+        <Link href="/login" className="transition-transform active:scale-95">
           Vous avez déjà un compte ?{' '}
           <span className="underline">Cliquez ici</span>
-        </a>
+        </Link>
         <Button>S&apos;enregistrer</Button>
       </form>
     </div>
