@@ -5,6 +5,7 @@ import { getThemes } from 'api/query/theme.query';
 import { ThemeType } from 'types/ThemeTypes';
 import Button from '../components/Button';
 import { useRouter } from 'next/navigation';
+import BackButton from '../components/BackButton';
 
 export default function Page() {
   const router = useRouter();
@@ -45,7 +46,10 @@ export default function Page() {
   };
 
   return (
-    <div className="flex flex-col w-full h-full items-center justify-center">
+    <main className="flex flex-col w-full h-full items-center justify-center">
+      <div className="absolute left-0 top-2">
+        <BackButton />
+      </div>
       <p className="text-4xl mb-8">Choix du thème </p>
       <div className="w-full flex items-center justify-center">
         <button
@@ -78,6 +82,6 @@ export default function Page() {
       <Button className="mt-4" onClick={handleValidation}>
         Valider
       </Button>
-    </div>
+    </main>
   );
 }

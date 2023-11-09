@@ -1,24 +1,15 @@
 'use client';
 
-import Image from 'next/image';
 import { useAppSelector } from '../../../store';
-import arrow from '@/assets/icons/arrow.svg';
-import { useRouter } from 'next/navigation';
 import { UserType } from '../../../types/UserTypes';
+import BackButton from '../components/BackButton';
 
 export default function Page() {
-  const router = useRouter();
   const user: UserType = useAppSelector((state) => state.auth.user);
 
   return (
-    <div className="h-full w-full flex flex-col pt-5">
-      <div className="flex cursor-pointer" onClick={() => router.push('/')}>
-        <Image
-          className="w-4 object-contain ml-2 rotate-90"
-          src={arrow}
-          alt=""
-        />
-      </div>
+    <main className="h-full w-full flex flex-col pt-5">
+      <BackButton />
       <div className="flex flex-col my-auto justify-center items-center">
         <h1 className="text-5xl mb-10">Mes informations</h1>
         <div className="flex flex-col items-center space-y-4 w-1/3">
@@ -50,7 +41,8 @@ export default function Page() {
             </>
           )}
         </div>
+        B
       </div>
-    </div>
+    </main>
   );
 }
