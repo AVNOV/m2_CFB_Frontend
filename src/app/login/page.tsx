@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { loginRequest } from '../../../api/query/user.query';
 import { ToastContext } from '../layout';
 import Link from 'next/link';
+import BackButton from '../components/BackButton';
 
 export default function Page() {
   const router = useRouter();
@@ -31,7 +32,10 @@ export default function Page() {
   const { handleSubmit, control } = useForm();
 
   return (
-    <div className="h-full w-full flex flex-col justify-center items-center">
+    <main className="relative h-full w-full flex flex-col justify-center items-center">
+      <div className="absolute left-0 top-2">
+        <BackButton />
+      </div>
       <h1 className="text-5xl mb-10">Se connecter</h1>
       <form
         className="flex flex-col items-center space-y-4 w-1/3"
@@ -57,6 +61,6 @@ export default function Page() {
         </Link>
         <Button>Se connecter</Button>
       </form>
-    </div>
+    </main>
   );
 }

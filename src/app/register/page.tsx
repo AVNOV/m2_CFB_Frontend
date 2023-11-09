@@ -1,13 +1,17 @@
 'use client';
 import React, { useContext } from 'react';
-import { createUser } from '../../../api/query/user.query';
-import { CreateUserType } from '../../../types/UserTypes';
-import Button from '../components/Button';
-import Input from '../components/Input';
-import { Controller, FieldValues, useForm } from 'react-hook-form';
 import { ToastContext } from '../layout';
 import { useRouter } from 'next/navigation';
+
+import { createUser } from '../../../api/query/user.query';
+import { CreateUserType } from '../../../types/UserTypes';
+
+import { Controller, FieldValues, useForm } from 'react-hook-form';
+import Button from '../components/Button';
+import Input from '../components/Input';
+
 import Link from 'next/link';
+import BackButton from '../components/BackButton';
 
 export default function Page() {
   const router = useRouter();
@@ -26,7 +30,10 @@ export default function Page() {
   };
 
   return (
-    <div className="h-full w-full flex flex-col justify-center items-center">
+    <main className="h-full w-full flex flex-col justify-center items-center">
+      <div className="absolute left-0 top-2">
+        <BackButton />
+      </div>
       <h1 className="text-5xl mb-10">S&apos;enregistrer</h1>
       <form
         className="flex flex-col items-center space-y-4 w-1/3"
@@ -78,6 +85,6 @@ export default function Page() {
         </Link>
         <Button>S&apos;enregistrer</Button>
       </form>
-    </div>
+    </main>
   );
 }

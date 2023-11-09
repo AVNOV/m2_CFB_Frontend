@@ -18,9 +18,9 @@ export default function QuizzTemplateHandler() {
   ]);
 
   return (
-    <div>
+    <main>
       <Timer countdown={30} />
       <QuizzTemplate question={question} answers={answers} />
-    </div>
+    </main>
   );
 }
