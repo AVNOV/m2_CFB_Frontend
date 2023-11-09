@@ -82,7 +82,14 @@ export default function Home() {
           Solo
         </Button>
         <Button className=" mb-4 text-xl">Multijoueur</Button>
-        <Button className=" text-xl">Création de quizz</Button>
+        <Button
+          className=" text-xl"
+          onClick={() => {
+            router.push('/create-quiz');
+          }}
+        >
+          Création de quiz
+        </Button>
       </div>
     </main>
   );
