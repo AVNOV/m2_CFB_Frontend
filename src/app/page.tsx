@@ -1,6 +1,6 @@
 'use client';
 import { useAppDispatch, useAppSelector } from '../../store';
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 import { logout } from '../../slices/auth.slice';
 
 import Image from 'next/image';
@@ -10,9 +10,11 @@ import Lottie from 'lottie-react';
 import rocket from '../assets/images/rocket.json';
 import arrow from '@/assets/icons/arrow.svg';
 import { useRouter } from 'next/navigation';
+import { ToastContext } from './layout';
 
 export default function Home() {
   const router = useRouter();
+  const context = useContext(ToastContext);
   const { isLogged, user } = useAppSelector((store) => store.auth);
   const arrowRef = useRef<HTMLImageElement>(null);
   const profileMenuRef = useRef<HTMLDivElement>(null);
@@ -75,7 +77,11 @@ export default function Home() {
         <h1 className="text-8xl mb-20">Quizziky</h1>
         <Button
           onClick={() => {
-            router.push('/theme-choice');
+            if (isLogged) {
+              router.push('/theme-choice');
+            } else {
+              context.toast.error('Vous devez être connecté');
+            }
           }}
           className=" mb-4 text-xl"
         >
