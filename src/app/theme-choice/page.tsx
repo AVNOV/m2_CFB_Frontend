@@ -1,23 +1,39 @@
 'use client';
 import { useState } from 'react';
 import './card.css';
-
-const items = [
-  { id: 1, text: 'Thème 1' },
-  { id: 2, text: 'Thème 2' },
-  { id: 3, text: 'Thème 3' },
-];
+import { getThemes } from 'api/query/theme.query';
+import { ThemeType } from 'types/ThemeTypes';
 
 export default function Carousel() {
+  const [themes, setThemes] = useState<ThemeType[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
 
+  const fetchThemesData = async () => {
+    try {
+      const themesData = await getThemes();
+      setThemes(themesData);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des thèmes', error);
+    }
+  };
+
+  if (themes.length === 0) {
+    fetchThemesData();
+    return null;
+  }
+
+  console.log(
+    'themes',
+    themes.map((theme) => theme.name),
+  );
+
   const nextItem = () => {
-    setCurrentIndex((currentIndex + 1) % items.length);
+    setCurrentIndex((currentIndex + 1) % themes.length);
   };
 
   const prevItem = () => {
-    setCurrentIndex((currentIndex - 1 + items.length) % items.length);
+    setCurrentIndex((currentIndex - 1 + themes.length) % themes.length);
   };
 
   const handleValidation = () => {
@@ -40,12 +56,12 @@ export default function Carousel() {
           <div
             className="card"
             onClick={() => {
-              setSelectedItemId(items[currentIndex].id);
+              setSelectedItemId(themes[currentIndex].id);
               handleValidation();
             }}
           >
             <div className="card-content">
-              <p className="card-title">{items[currentIndex].text}</p>
+              <p className="card-title">{themes[currentIndex].name}</p>
             </div>
           </div>
         </div>
