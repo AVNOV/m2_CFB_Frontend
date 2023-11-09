@@ -9,8 +9,10 @@ import Lottie from 'lottie-react';
 
 import rocket from '../assets/images/rocket.json';
 import arrow from '@/assets/icons/arrow.svg';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
   const { isLogged, user } = useAppSelector((store) => store.auth);
   const arrowRef = useRef<HTMLImageElement>(null);
   const profileMenuRef = useRef<HTMLDivElement>(null);
@@ -71,7 +73,14 @@ export default function Home() {
       <Lottie className="rocket" animationData={rocket} loop={true} />
       <div className="fade-in relative z-10 flex flex-col items-center justify-center h-full">
         <h1 className="text-8xl mb-20">Quizziky</h1>
-        <Button className=" mb-4 text-xl">Solo</Button>
+        <Button
+          onClick={() => {
+            router.push('/theme-choice');
+          }}
+          className=" mb-4 text-xl"
+        >
+          Solo
+        </Button>
         <Button className=" mb-4 text-xl">Multijoueur</Button>
         <Button className=" text-xl">Création de quizz</Button>
       </div>
