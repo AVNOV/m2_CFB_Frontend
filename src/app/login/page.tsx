@@ -8,6 +8,7 @@ import { useAppDispatch } from '../../../store';
 import { useRouter } from 'next/navigation';
 import { loginRequest } from '../../../api/query/user.query';
 import { ToastContext } from '../layout';
+import Link from 'next/link';
 
 export default function Page() {
   const router = useRouter();
@@ -50,10 +51,10 @@ export default function Page() {
             <Input required label="Mot de passe" type="password" {...field} />
           )}
         />
-        <a href="/register">
+        <Link href="/register" className="transition-transform active:scale-95">
           Vous n&apos;avez pas de compte ?{' '}
           <span className="underline">Cliquez ici</span>
-        </a>
+        </Link>
         <Button>Se connecter</Button>
       </form>
     </div>
