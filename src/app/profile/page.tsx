@@ -11,8 +11,11 @@ export default function Page() {
 
   return (
     <div className="h-full w-full flex flex-col pt-5">
-      <Link href="/" className="ml-2 w-4 transition-transform active:scale-95">
-        <Image className="object-contain rotate-90" src={arrow} alt="" />
+      <Link
+        href="/"
+        className="pl-2 w-fit transition-transform active:scale-95"
+      >
+        <Image className="w-4 object-contain rotate-90" src={arrow} alt="" />
       </Link>
       <div className="flex flex-col my-auto justify-center items-center">
         <h1 className="text-5xl mb-10">Mes informations</h1>
