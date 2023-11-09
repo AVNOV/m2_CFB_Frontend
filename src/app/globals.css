@@ -11,7 +11,7 @@ body {
 
 @keyframes orbite {
   0% {
-    transform: rotate(0deg) translateX(-250%);
+    transform: rotate(10deg) translateX(-250%);
   }
   100% {
     transform: rotate(360deg) translateX(0%);
