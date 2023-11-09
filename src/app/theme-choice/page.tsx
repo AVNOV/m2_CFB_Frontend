@@ -3,8 +3,11 @@ import { useState } from 'react';
 import './card.css';
 import { getThemes } from 'api/query/theme.query';
 import { ThemeType } from 'types/ThemeTypes';
+import Button from '../components/Button';
+import { useRouter } from 'next/navigation';
 
-export default function Carousel() {
+export default function Page() {
+  const router = useRouter();
   const [themes, setThemes] = useState<ThemeType[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
@@ -37,14 +40,13 @@ export default function Carousel() {
   };
 
   const handleValidation = () => {
-    if (selectedItemId === null) {
-      return;
-    }
-    console.log('ID theme', selectedItemId);
+    console.log('selectedItemId', selectedItemId);
+    router.push('/game');
   };
 
   return (
     <div className="flex flex-col w-full h-full items-center justify-center">
+      <p className="text-4xl mb-8">Choix du thème </p>
       <div className="w-full flex items-center justify-center">
         <button
           className="mr-5 w-10 h-10 bg-gray-800 text-white p-2 rounded-full shadow-md hover:bg-gray-700"
@@ -54,10 +56,11 @@ export default function Carousel() {
         </button>
         <div className="overflow-hidden">
           <div
-            className="card"
+            className={`card ${
+              selectedItemId === themes[currentIndex].id ? 'card-selected' : ''
+            }`}
             onClick={() => {
               setSelectedItemId(themes[currentIndex].id);
-              handleValidation();
             }}
           >
             <div className="card-content">
@@ -72,9 +75,9 @@ export default function Carousel() {
           <div className="ml-0.5">&#9654;</div>
         </button>
       </div>
-      {/* <Button className="mt-4" onClick={handleValidation}>
+      <Button className="mt-4" onClick={handleValidation}>
         Valider
-      </Button> */}
+      </Button>
     </div>
   );
 }
