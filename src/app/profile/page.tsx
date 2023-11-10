@@ -29,16 +29,16 @@ export default function Page() {
             </>
           ) : (
             <>
-              <p className="text-lg">
-                <span data-test="firstname" className="text-base">
+              <p className="text-2xl">
+                <span data-test="firstname" className="text-2xl">
                   {user.firstname}
                 </span>
-                <span data-test="lastname" className="text-base ml-2">
+                <span data-test="lastname" className="text-2xl ml-2">
                   {user.lastname}
                 </span>
               </p>
-              <p className="text-lg">
-                <span data-test="email" className="text-base">
+              <p className="text-2xl">
+                <span data-test="email" className="text-2xl">
                   {user.email}
                 </span>
               </p>

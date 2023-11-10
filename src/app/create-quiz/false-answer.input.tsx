@@ -14,7 +14,7 @@ const FalseAnswerInput: React.FC<FalseAnswerInputProps> = ({
   const [falseAnswer, setFalseAnswer] = useState<CreateAnswerType>({
     title: '',
     questionId: 0,
-    isCorrect: false,
+    rightAnswer: false,
   });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

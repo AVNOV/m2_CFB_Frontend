@@ -5,11 +5,11 @@ import { getThemes } from 'api/query/theme.query';
 import { ThemeType } from 'types/ThemeTypes';
 import { CreateQuizType, UpdateQuizType } from 'types/QuizTypes';
 import arrow from '@/assets/icons/arrow.svg';
-import { CreateQuestionType } from 'types/QuestionTypes';
+import { UpdateQuestionType } from 'types/QuestionTypes';
 import Button from '../components/Button';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { createQuiz } from 'api/query/quiz.query';
+import { createQuiz, updateQuiz } from 'api/query/quiz.query';
 import { CreateAnswerType } from 'types/AnswerTypes';
 import { createQuestion } from 'api/query/question.query';
 import { createAnswer } from 'api/query/answer.query';
@@ -19,35 +19,38 @@ export default function Page() {
   const router = useRouter();
   const [themes, setThemes] = useState<ThemeType[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [quizCreated, setQuizCreated] = useState(false);
 
   const newQuizData: CreateQuizType = {
     title: '',
     difficulty: 0,
-    themeId: 0,
-    userId: 0,
+    themeId: 1,
   };
 
-  const [question, setQuestion] = useState<CreateQuestionType>({
-    title: '',
+  const [question, setQuestion] = useState<UpdateQuestionType>({
+    id: 0,
     quizId: 0,
+    title: '',
   });
 
   const [quizData, setQuizData] = useState<UpdateQuizType>({
     id: 0,
+    userId: 0,
     themeId: 0,
+    difficulty: 0,
     title: '',
   });
 
   const [answerTrue, setAnswerTrue] = useState<CreateAnswerType>({
     title: '',
     questionId: 0,
-    isCorrect: true,
+    rightAnswer: true,
   });
 
   const [falseAnswers, setFalseAnswers] = useState([
-    { title: '', questionId: 0, isCorrect: false },
-    { title: '', questionId: 0, isCorrect: false },
-    { title: '', questionId: 0, isCorrect: false },
+    { title: '', questionId: 0, rightAnswer: false },
+    { title: '', questionId: 0, rightAnswer: false },
+    { title: '', questionId: 0, rightAnswer: false },
   ]);
 
   const fetchThemesData = async () => {
@@ -66,12 +69,15 @@ export default function Page() {
           id: res.id,
           themeId: res.themeId,
           title: res.title,
+          difficulty: res.difficulty,
+          userId: res.userId,
         });
         setQuestion({
           ...question,
           quizId: res.id,
         });
       });
+      setQuizCreated(true);
     } catch (error) {
       console.error(
         'Erreur lors de la création/récupération du nouveau quiz',
@@ -106,7 +112,7 @@ export default function Page() {
     fetchThemesData();
   }
 
-  if (quizData.id === 0) {
+  if (!quizCreated && quizData.id === 0) {
     newQuiz();
   }
 
@@ -125,6 +131,10 @@ export default function Page() {
     setQuestion({ ...question, title: e.target.value });
   };
 
+  const handleAnswerTrueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAnswerTrue({ ...answerTrue, title: e.target.value });
+  };
+
   const handleFalseAnswerUpdate = (
     updatedFalseAnswer: CreateAnswerType,
     index: number,
@@ -134,8 +144,13 @@ export default function Page() {
     setFalseAnswers(updatedFalseAnswers);
   };
 
-  const handleValidateQuiz = () => {
-    console.log(quizData);
+  const handleValidateQuiz = async () => {
+    try {
+      await updateQuiz(quizData);
+      console.log('Quiz mis à jour avec succès!', quizData);
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour du quiz', error);
+    }
   };
 
   return (
@@ -196,6 +211,8 @@ export default function Page() {
             <div className="flex flex-col items-center">
               <p className="mt-4 mb-2">Réponse juste</p>
               <input
+                onChange={handleAnswerTrueChange}
+                value={answerTrue?.title}
                 type="text"
                 className="border-2 focus:outline-orange-400 border-grey rounded-lg py-2 px-3 leading-tight border-solid bg-white text-black"
               />
