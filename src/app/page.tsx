@@ -20,7 +20,7 @@ export default function Home() {
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
 
-  const onProfileClick = () => {
+  const onProfileClick = (): void => {
     if (arrowRef.current!.style.transform === 'rotate(180deg)') {
       arrowRef.current!.style.transform = 'rotate(0deg)';
       profileMenuRef.current!.style.opacity = '0';
@@ -30,8 +30,16 @@ export default function Home() {
     }
   };
 
-  const onLogout = () => {
+  const onLogout = (): void => {
     dispatch(logout());
+  };
+
+  const onNavigation = (href: string): void => {
+    if (isLogged) {
+      router.push(href);
+    } else {
+      context.toast.error('Vous devez être connecté');
+    }
   };
 
   return (
@@ -79,18 +87,17 @@ export default function Home() {
       <div className="fade-in relative z-10 flex flex-col items-center justify-center h-full">
         <h1 className="text-8xl mb-20">Quizziky</h1>
         <Button
-          onClick={() => {
-            if (isLogged) {
-              router.push('/theme-choice');
-            } else {
-              context.toast.error('Vous devez être connecté');
-            }
-          }}
+          onClick={() => onNavigation('theme-choice')}
           className=" mb-4 text-xl"
         >
           Solo
         </Button>
-        <Button className=" mb-4 text-xl">Multijoueur</Button>
+        <Button
+          onClick={() => onNavigation('/multi-choice')}
+          className=" mb-4 text-xl"
+        >
+          Multijoueur
+        </Button>
         <Button className=" text-xl">Création de quizz</Button>
       </div>
     </main>
