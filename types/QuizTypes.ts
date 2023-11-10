@@ -20,5 +20,10 @@ export type CreateQuizType = {
   difficulty: number;
   themeId: number;
   userId: number;
-  questions: CreateQuestionType[];
+};
+
+export type UpdateQuizType = {
+  id: number;
+  title: string;
+  themeId: number;
 };
