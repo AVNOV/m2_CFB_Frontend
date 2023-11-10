@@ -73,6 +73,12 @@ export default function Home() {
               >
                 Profil
               </a>
+              <a
+                className="flex bg-white justify-center text-black py-2 hover:bg-slate-300 transition-colors"
+                href="my-quizzes"
+              >
+                Mes Quiz
+              </a>
               <div
                 onClick={onLogout}
                 className="flex bg-white rounded-b-md justify-center text-black whitespace-nowrap px-5 py-2 cursor-pointer hover:bg-slate-100 active:bg-slate-200 transition-colors"
@@ -98,7 +104,14 @@ export default function Home() {
         >
           Multijoueur
         </Button>
-        <Button className=" text-xl">Création de quizz</Button>
+        <Button
+          className=" text-xl"
+          onClick={() => {
+            router.push('/create-quiz');
+          }}
+        >
+          Création de quiz
+        </Button>
       </div>
     </main>
   );

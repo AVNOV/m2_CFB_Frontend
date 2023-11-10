@@ -20,21 +20,16 @@ export default function Page() {
             </>
           ) : (
             <>
-              <p className="text-lg">
-                prénom:{' '}
-                <span data-test="firstname" className="text-base">
+              <p className="text-2xl">
+                <span data-test="firstname" className="text-2xl">
                   {user.firstname}
                 </span>
-              </p>
-              <p className="text-lg">
-                nom:{' '}
-                <span data-test="lastname" className="text-base">
+                <span data-test="lastname" className="text-2xl ml-2">
                   {user.lastname}
                 </span>
               </p>
-              <p className="text-lg">
-                email:{' '}
-                <span data-test="email" className="text-base">
+              <p className="text-2xl">
+                <span data-test="email" className="text-2xl">
                   {user.email}
                 </span>
               </p>

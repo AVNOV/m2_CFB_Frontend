@@ -14,3 +14,17 @@ export type QuizType = {
   questions: QuestionType[];
   games: GameType[];
 };
+
+export type UpdateQuizType = {
+  id: number;
+  title: string;
+  difficulty: number;
+  themeId: number;
+  userId: number | null;
+};
+
+export type CreateQuizType = {
+  title: string;
+  difficulty: number;
+  themeId: number;
+};
