@@ -4,11 +4,13 @@ type props = {
   type?: 'submit' | 'button';
   className?: string;
   disabled?: boolean;
+  'data-test'?: string;
 };
 
 export default function Button(props: props) {
   return (
     <button
+      data-test={props['data-test']}
       disabled={props.disabled}
       type={props.type}
       onClick={props.disabled ? () => {} : props.onClick}
