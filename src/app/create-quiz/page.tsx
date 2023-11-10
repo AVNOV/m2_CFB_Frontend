@@ -3,9 +3,9 @@ import { useState } from 'react';
 
 import { getThemes } from 'api/query/theme.query';
 import { ThemeType } from 'types/ThemeTypes';
-import { QuizType } from 'types/QuizTypes';
+import { CreateQuizType } from 'types/QuizTypes';
 import arrow from '@/assets/icons/arrow.svg';
-import { QuestionType } from 'types/QuestionTypes';
+import { CreateQuestionType } from 'types/QuestionTypes';
 import Button from '../components/Button';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -14,16 +14,13 @@ export default function Page() {
   const [themes, setThemes] = useState<ThemeType[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const router = useRouter();
-  const [quizData, setQuizData] = useState<QuizType>({
-    id: 0,
+  //   const [questions, setQuestions] = useState<CreateQuestionType[]>([]);
+  const [quizData, setQuizData] = useState<CreateQuizType>({
     title: '',
     difficulty: 0,
     themeId: 0,
-    theme: { id: 0, name: '' },
-    userId: null,
-    user: null,
+    userId: 0,
     questions: [],
-    games: [],
   });
 
   const fetchThemesData = async () => {
@@ -49,10 +46,9 @@ export default function Page() {
   };
 
   const addQuestion = () => {
-    const newQuestion: QuestionType = {
-      id: quizData.questions.length + 1,
+    const newQuestion: CreateQuestionType = {
       title: '',
-      quizzes: [quizData],
+      quizId: 0,
       answers: [],
     };
     setQuizData({

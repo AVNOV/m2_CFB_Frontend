@@ -1,5 +1,5 @@
 import { GameType } from './GameTypes';
-import { QuestionType } from './QuestionTypes';
+import { CreateQuestionType, QuestionType } from './QuestionTypes';
 import { UserType } from './UserTypes';
 import { ThemeType } from './ThemeTypes';
 
@@ -15,10 +15,10 @@ export type QuizType = {
   games: GameType[];
 };
 
-export type QuizCreateType = {
+export type CreateQuizType = {
   title: string;
   difficulty: number;
   themeId: number;
   userId: number;
-  questions: QuestionType[];
+  questions: CreateQuestionType[];
 };

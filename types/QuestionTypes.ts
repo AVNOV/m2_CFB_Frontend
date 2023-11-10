@@ -1,4 +1,4 @@
-import { AnswerType } from './AnswerTypes';
+import { AnswerType, CreateAnswerType } from './AnswerTypes';
 import { QuizType } from './QuizTypes';
 
 export type QuestionType = {
@@ -8,8 +8,8 @@ export type QuestionType = {
   answers: AnswerType[];
 };
 
-export type QuestionCreateType = {
+export type CreateQuestionType = {
   title: string;
   quizId: number;
-  answers: AnswerType[];
+  answers: CreateAnswerType[];
 };

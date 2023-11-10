@@ -5,7 +5,7 @@ export type AnswerType = {
   isCorrect: boolean;
 };
 
-export type AnswerCreateType = {
+export type CreateAnswerType = {
   title: string;
   questionId: number;
   isCorrect: boolean;
