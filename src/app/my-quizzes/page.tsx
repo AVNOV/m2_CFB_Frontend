@@ -33,23 +33,24 @@ export default function Page() {
           alt=""
         />
       </div>
-      <div className="flex flex-col w-full h-1/2 items-center justify-center">
-        <p className="text-4xl">Mes Quiz</p>
-        <div className="flex flex-col h-1/2 items-center justify-center"></div>
-        {quizzes.length === 0 ? (
-          <p className="text-2xl mb-8">
-            Vous n&apos;avez pas encore créé de quiz
-          </p>
-        ) : (
-          quizzes.map((quiz) => (
-            <div
-              key={quiz.id}
-              className="flex flex-col w-full h-full items-center justify-center"
-            >
-              <p className="text-2xl mb-8">{quiz.title}</p>
-            </div>
-          ))
-        )}
+      <div className="flex flex-col my-auto justify-center items-center">
+        <h1 className="text-5xl mb-10">Mes informations</h1>
+        <div className="flex flex-col items-center space-y-4 w-1/3">
+          {quizzes.length === 0 ? (
+            <p className="text-2xl mb-8">
+              Vous n&apos;avez pas encore créé de quiz
+            </p>
+          ) : (
+            quizzes.map((quiz) => (
+              <div
+                key={quiz.id}
+                className="flex flex-col w-full h-full items-center justify-center"
+              >
+                <p className="text-2xl mb-8">{quiz.title}</p>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
