@@ -22,5 +22,11 @@ export const createQuiz = async (quiz: CreateQuizType): Promise<QuizType> => {
 
 export const updateQuiz = async (quiz: UpdateQuizType): Promise<QuizType> => {
   const { data } = await API.put(`/quizzes/${quiz.id}`, quiz);
+
+  return data;
+};
+
+export const getRandomQuiz = async (themeId: number) => {
+  const { data } = await API.get(`/quizzes/${themeId}/random`);
   return data;
 };
