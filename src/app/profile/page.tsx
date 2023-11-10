@@ -30,19 +30,14 @@ export default function Page() {
           ) : (
             <>
               <p className="text-lg">
-                prénom:{' '}
                 <span data-test="firstname" className="text-base">
                   {user.firstname}
                 </span>
-              </p>
-              <p className="text-lg">
-                nom:{' '}
-                <span data-test="lastname" className="text-base">
+                <span data-test="lastname" className="text-base ml-2">
                   {user.lastname}
                 </span>
               </p>
               <p className="text-lg">
-                email:{' '}
                 <span data-test="email" className="text-base">
                   {user.email}
                 </span>
