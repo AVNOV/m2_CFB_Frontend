@@ -13,8 +13,8 @@ export default function Page() {
         <BackButton />
       </div>
       <ul className="flex space-x-10 justify-center">
-        <ChoiceCard lottie={group} title={'Joue entre amis'} />
-        <ChoiceCard lottie={duel} title={'Duel'} />
+        <ChoiceCard href="/room" lottie={group} title={'Joue entre amis'} />
+        <ChoiceCard href="" lottie={duel} title={'Duel'} />
       </ul>
     </main>
   );
