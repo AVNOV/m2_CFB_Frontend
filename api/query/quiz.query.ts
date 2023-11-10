@@ -15,12 +15,12 @@ export const getQuizzes = async () => {
   return data;
 };
 
-export const createQuiz = async (quiz: CreateQuizType) => {
-  const data: QuizType = await API.post('/quiz', quiz);
+export const createQuiz = async (quiz: CreateQuizType): Promise<QuizType> => {
+  const { data } = await API.post('/quizzes', quiz);
   return data;
 };
 
-export const updateQuiz = async (quiz: UpdateQuizType) => {
-  const data: QuizType = await API.put(`/quiz/${quiz.id}`, quiz);
+export const updateQuiz = async (quiz: UpdateQuizType): Promise<QuizType> => {
+  const { data } = await API.put(`/quizzes/${quiz.id}`, quiz);
   return data;
 };

@@ -15,15 +15,16 @@ export const getQuestion = async (questionId: string) => {
   return data;
 };
 
-export const createQuestion = async (question: CreateQuestionType) => {
-  const data: QuestionType = await API.post('/question', question);
+export const createQuestion = async (
+  question: CreateQuestionType,
+): Promise<QuestionType> => {
+  const { data } = await API.post('/questions', question);
   return data;
 };
 
-export const updateQuestion = async (question: UpdateQuestionType) => {
-  const data: QuestionType = await API.put(
-    `/question/${question.id}`,
-    question,
-  );
+export const updateQuestion = async (
+  question: UpdateQuestionType,
+): Promise<QuestionType> => {
+  const { data } = await API.put(`/question/${question.id}`, question);
   return data;
 };

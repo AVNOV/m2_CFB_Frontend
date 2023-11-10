@@ -1,5 +1,5 @@
 import API from 'api/API';
-import { CreateAnswerType } from 'types/AnswerTypes';
+import { AnswerType, CreateAnswerType } from 'types/AnswerTypes';
 
 export const getAnswer = async (answerId: string) => {
   const data = await API.get(`/answer/${answerId}`);
@@ -11,7 +11,9 @@ export const getAnswers = async () => {
   return data;
 };
 
-export const createAnswer = async (answer: CreateAnswerType) => {
-  const data = await API.post(`/answer`, answer);
+export const createAnswer = async (
+  answer: CreateAnswerType,
+): Promise<AnswerType> => {
+  const { data } = await API.post(`/answers`, answer);
   return data;
 };
