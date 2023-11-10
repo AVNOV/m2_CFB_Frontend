@@ -1,5 +1,5 @@
 import { GameType } from './GameTypes';
-import { CreateQuestionType, QuestionType } from './QuestionTypes';
+import { QuestionType } from './QuestionTypes';
 import { UserType } from './UserTypes';
 import { ThemeType } from './ThemeTypes';
 
