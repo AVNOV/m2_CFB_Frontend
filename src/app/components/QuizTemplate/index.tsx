@@ -12,6 +12,7 @@ import {
 } from 'slices/quiz.slice';
 import { updateGame } from 'api/query/game.query';
 import Timer from '../Timer';
+import { useRouter } from 'next/navigation';
 
 interface TemplateProps {
   question: string;
@@ -22,6 +23,7 @@ interface TemplateProps {
 }
 
 export default function QuizzTemplate(TemplateProps: TemplateProps) {
+  const router = useRouter();
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const { question, answers, currentQuestion, nbQuestions, gameId } =
     TemplateProps;
@@ -45,6 +47,8 @@ export default function QuizzTemplate(TemplateProps: TemplateProps) {
       nbCorrectAnswers + (rightAnswer ? 1 : 0),
       currentQuestion + 1,
     );
+
+    if (currentQuestion + 1 === 10) router.push('/score');
 
     setTimeout(() => {
       setTimeInSeconds(30);
