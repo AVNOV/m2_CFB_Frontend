@@ -9,13 +9,12 @@ export type QuestionType = {
   answers: AnswerType[];
 };
 
-export type CreateQuestionType = {
-  title: string;
-  quizId: number;
-};
-
 export type UpdateQuestionType = {
   id: number;
-  title: string;
   quizId: number;
+  title: string;
+};
+
+export type CreateQuestionType = {
+  title: string;
 };
