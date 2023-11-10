@@ -21,7 +21,7 @@ describe('Page de connexion', () => {
       statusCode: 201,
       fixture: '/login/success.json',
     }).as('user');
-    cy.get('button').click({ multiple: true });
+    cy.get('[data-test="submit"]').click({ multiple: true });
 
     cy.wait('@user').then(({ request, response }) => {
       expect(response?.statusCode).to.equal(201);
@@ -46,7 +46,7 @@ describe('Page de connexion', () => {
       statusCode: 400,
       fixture: '/login/fail.json',
     }).as('user');
-    cy.get('button').click({ multiple: true });
+    cy.get('[data-test="submit"]').click({ multiple: true });
 
     // Vérifier l'affichage du message d'erreur
     cy.contains("L'email ou le mot de passe ne correspond pas").should(

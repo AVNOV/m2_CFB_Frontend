@@ -59,7 +59,7 @@ export default function Page() {
           Vous n&apos;avez pas de compte ?{' '}
           <span className="underline">Cliquez ici</span>
         </Link>
-        <Button>Se connecter</Button>
+        <Button data-test="submit">Se connecter</Button>
       </form>
     </main>
   );

@@ -83,7 +83,7 @@ export default function Page() {
           Vous avez déjà un compte ?{' '}
           <span className="underline">Cliquez ici</span>
         </Link>
-        <Button>S&apos;enregistrer</Button>
+        <Button data-test="submit">S&apos;enregistrer</Button>
       </form>
     </main>
   );

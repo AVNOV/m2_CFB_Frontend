@@ -27,7 +27,7 @@ describe("Page d'inscription", () => {
       statusCode: 201,
       fixture: '/register/success.json',
     }).as('user');
-    cy.get('button').click({ multiple: true });
+    cy.get('[data-test="submit"]').click({ multiple: true });
 
     cy.wait('@user').then(({ request, response }) => {
       expect(response?.statusCode).to.equal(201);
@@ -66,7 +66,7 @@ describe("Page d'inscription", () => {
       statusCode: 400,
       fixture: '/register/fail.json',
     }).as('user');
-    cy.get('button').click({ multiple: true });
+    cy.get('[data-test="submit"]').click({ multiple: true });
 
     // Vérifier l'affichage du message d'erreur
     cy.contains('Problème lors de la création de votre compte').should(
