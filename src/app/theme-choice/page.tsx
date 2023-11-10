@@ -6,12 +6,17 @@ import { ThemeType } from 'types/ThemeTypes';
 import Button from '../components/Button';
 import { useRouter } from 'next/navigation';
 import BackButton from '../components/BackButton';
+import { getRandomQuiz } from 'api/query/quiz.query';
+import { updateQuiz } from 'slices/quiz.slice';
+import { useAppDispatch } from 'store';
+import { createGame } from 'api/query/game.query';
 
 export default function Page() {
   const router = useRouter();
   const [themes, setThemes] = useState<ThemeType[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
+  const dispatch = useAppDispatch();
 
   const fetchThemesData = async () => {
     try {
@@ -27,11 +32,6 @@ export default function Page() {
     return null;
   }
 
-  console.log(
-    'themes',
-    themes.map((theme) => theme.name),
-  );
-
   const nextItem = () => {
     setCurrentIndex((currentIndex + 1) % themes.length);
   };
@@ -40,9 +40,18 @@ export default function Page() {
     setCurrentIndex((currentIndex - 1 + themes.length) % themes.length);
   };
 
-  const handleValidation = () => {
-    console.log('selectedItemId', selectedItemId);
-    router.push('/game');
+  const handleValidation = async () => {
+    if (selectedItemId) {
+      const quiz = await getRandomQuiz(selectedItemId);
+
+      if (!quiz.id) {
+        router.push('/');
+      } else {
+        dispatch(updateQuiz(quiz));
+        const game = await createGame(quiz.id);
+        router.push(`/game?gameId=${game.id}`);
+      }
+    }
   };
 
   return (

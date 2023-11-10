@@ -10,3 +10,8 @@ export const getQuizzes = async () => {
   const data: QuizType[] = await API.get('/quiz');
   return data;
 };
+
+export const getRandomQuiz = async (themeId: number) => {
+  const { data } = await API.get(`/quizzes/${themeId}/random`);
+  return data;
+};
