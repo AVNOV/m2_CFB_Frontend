@@ -12,7 +12,7 @@ export default function Page() {
       <div className="w-2/5 flex flex-row mt-10 items-center justify-between">
         <Button onClick={() => router.push('/')}>Retourner au menu</Button>
         <Button onClick={() => router.push('/create-quiz')}>
-          Créer un nouveau quizz
+          Créer un nouveau quiz
         </Button>
       </div>
     </div>

@@ -4,3 +4,9 @@ export type AnswerType = {
   questionId: number;
   isCorrect: boolean;
 };
+
+export type AnswerCreateType = {
+  title: string;
+  questionId: number;
+  isCorrect: boolean;
+};

@@ -7,3 +7,9 @@ export type QuestionType = {
   quizzes: QuizType[];
   answers: AnswerType[];
 };
+
+export type QuestionCreateType = {
+  title: string;
+  quizId: number;
+  answers: AnswerType[];
+};
