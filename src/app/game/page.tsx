@@ -20,8 +20,8 @@ export default function Page() {
       {!gameId && <LoadingScreen />}
       {gameId && (
         <QuizzTemplate
-          question={quiz.questions[currentQuestion].title}
-          answers={quiz.questions[currentQuestion].answers}
+          question={quiz?.questions[currentQuestion].title}
+          answers={quiz?.questions[currentQuestion].answers}
           currentQuestion={currentQuestion}
           nbQuestions={quiz.questions.length}
           gameId={parseInt(gameId)}
