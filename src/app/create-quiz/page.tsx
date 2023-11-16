@@ -64,20 +64,23 @@ export default function Page() {
 
   const newQuiz = async () => {
     try {
-      await createQuiz(newQuizData).then((res) => {
-        setQuizData({
-          id: res.id,
-          themeId: res.themeId,
-          title: res.title,
-          difficulty: res.difficulty,
-          userId: res.userId,
+      await createQuiz(newQuizData)
+        .then((res) => {
+          setQuizData({
+            id: res.id,
+            themeId: res.themeId,
+            title: res.title,
+            difficulty: res.difficulty,
+            userId: res.userId,
+          });
+          setQuestion({
+            ...question,
+            quizId: res.id,
+          });
+        })
+        .then(() => {
+          setQuizCreated(true);
         });
-        setQuestion({
-          ...question,
-          quizId: res.id,
-        });
-      });
-      setQuizCreated(true);
     } catch (error) {
       console.error(
         'Erreur lors de la création/récupération du nouveau quiz',
