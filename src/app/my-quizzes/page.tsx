@@ -9,6 +9,7 @@ import { QuizType } from 'types/QuizTypes';
 
 export default function Page() {
   const router = useRouter();
+  const [fetch, isFetching] = useState(false);
   const [quizzes, setQuizzes] = useState<QuizType[]>([]);
 
   const fetchQuizzesData = async () => {
@@ -20,8 +21,9 @@ export default function Page() {
     }
   };
 
-  if (quizzes.length === 0) {
+  if (quizzes.length === 0 && !fetch) {
     fetchQuizzesData();
+    isFetching(true);
   }
 
   return (
@@ -34,7 +36,7 @@ export default function Page() {
         />
       </div>
       <div className="flex flex-col my-auto justify-center items-center">
-        <h1 className="text-5xl mb-10">Mes informations</h1>
+        <h1 className="text-5xl mb-10">Mes Quiz</h1>
         <div className="flex flex-col items-center space-y-4 w-1/3">
           {quizzes.length === 0 ? (
             <p className="text-2xl mb-8">
