@@ -1,5 +1,6 @@
 import API from '../API';
-import { CreateUserType } from '../../types/CreateUserType';
+import { CreateUserType } from '../../types/UserTypes';
+import { UserType } from '../../types/UserTypes';
 
 export const loginRequest = async (email: string, password: string) => {
   const { data } = await API.post('/login', { email, password });
@@ -13,5 +14,10 @@ export const loginRequest = async (email: string, password: string) => {
 
 export const createUser = async (user: CreateUserType) => {
   const { data } = await API.post('/register', user);
+  return data;
+};
+
+export const getUser = async (userId: string) => {
+  const data: UserType = await API.get(`/user/${userId}`);
   return data;
 };

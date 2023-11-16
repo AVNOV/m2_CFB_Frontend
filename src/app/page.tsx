@@ -1,21 +1,26 @@
 'use client';
 import { useAppDispatch, useAppSelector } from '../../store';
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 import { logout } from '../../slices/auth.slice';
 
 import Image from 'next/image';
 import Button from './components/Button';
+import Lottie from 'lottie-react';
 
-import rocket from '@/assets/images/rocket.png';
+import rocket from '../assets/images/rocket.json';
 import arrow from '@/assets/icons/arrow.svg';
+import { useRouter } from 'next/navigation';
+import { ToastContext } from './layout';
 
 export default function Home() {
+  const router = useRouter();
+  const context = useContext(ToastContext);
   const { isLogged, user } = useAppSelector((store) => store.auth);
   const arrowRef = useRef<HTMLImageElement>(null);
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
 
-  const onProfileClick = () => {
+  const onProfileClick = (): void => {
     if (arrowRef.current!.style.transform === 'rotate(180deg)') {
       arrowRef.current!.style.transform = 'rotate(0deg)';
       profileMenuRef.current!.style.opacity = '0';
@@ -25,15 +30,26 @@ export default function Home() {
     }
   };
 
-  const onLogout = () => {
+  const onLogout = (): void => {
     dispatch(logout());
+  };
+
+  const onNavigation = (href: string): void => {
+    if (isLogged) {
+      router.push(href);
+    } else {
+      context.toast.error('Vous devez être connecté');
+    }
   };
 
   return (
     <main className="relative h-full max-h-full overflow-hidden">
       <nav className="absolute right-5 top-3 z-20">
         {!isLogged ? (
-          <a href="login" className="text-lg">
+          <a
+            href="login"
+            className="text-lg transition-transform active:scale-95"
+          >
             Se connecter
           </a>
         ) : (
@@ -42,7 +58,7 @@ export default function Home() {
               <span className="text-lg">{user.firstname}</span>
               <Image
                 ref={arrowRef}
-                className="w-4 object-contain ml-2 transition-transform"
+                className="w-4 object-contain ml-2 transition-transform duration-300"
                 src={arrow}
                 alt=""
               />
@@ -52,14 +68,20 @@ export default function Home() {
               className="absolute top-[150%] -left-20 opacity-0 transition-opacity"
             >
               <a
-                className="flex bg-white rounded-t-md justify-center text-black py-2 hover:bg-slate-300 transition-colors"
+                className="flex bg-white rounded-t-md justify-center text-black py-2 hover:bg-slate-100 active:bg-slate-200 transition-colors"
                 href="profile"
               >
-                Profile
+                Profil
+              </a>
+              <a
+                className="flex bg-white justify-center text-black py-2 hover:bg-slate-300 transition-colors"
+                href="my-quizzes"
+              >
+                Mes Quiz
               </a>
               <div
                 onClick={onLogout}
-                className="flex bg-white rounded-b-md justify-center text-black whitespace-nowrap px-5 py-2 cursor-pointer hover:bg-slate-300 transition-colors"
+                className="flex bg-white rounded-b-md justify-center text-black whitespace-nowrap px-5 py-2 cursor-pointer hover:bg-slate-100 active:bg-slate-200 transition-colors"
               >
                 Se deconnecter
               </div>
@@ -67,12 +89,29 @@ export default function Home() {
           </div>
         )}
       </nav>
-      <Image className="rocket" src={rocket} alt="" />
+      <Lottie className="rocket" animationData={rocket} loop={true} />
       <div className="fade-in relative z-10 flex flex-col items-center justify-center h-full">
         <h1 className="text-8xl mb-20">Quizziky</h1>
-        <Button className=" mb-4 text-xl">Solo</Button>
-        <Button className=" mb-4 text-xl">Multijoueur</Button>
-        <Button className=" text-xl">Création de quizz</Button>
+        <Button
+          onClick={() => onNavigation('theme-choice')}
+          className=" mb-4 text-xl"
+        >
+          Solo
+        </Button>
+        <Button
+          onClick={() => onNavigation('/multi-choice')}
+          className=" mb-4 text-xl"
+        >
+          Multijoueur
+        </Button>
+        <Button
+          className=" text-xl"
+          onClick={() => {
+            router.push('/create-quiz');
+          }}
+        >
+          Création de quiz
+        </Button>
       </div>
     </main>
   );

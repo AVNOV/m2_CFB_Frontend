@@ -1,18 +1,39 @@
 'use client';
+import React, { useContext } from 'react';
+import { ToastContext } from '../layout';
+import { useRouter } from 'next/navigation';
+
 import { createUser } from '../../../api/query/user.query';
-import { CreateUserType } from '../../../types/CreateUserType';
+import { CreateUserType } from '../../../types/UserTypes';
+
+import { Controller, FieldValues, useForm } from 'react-hook-form';
 import Button from '../components/Button';
 import Input from '../components/Input';
-import { Controller, FieldValues, useForm } from 'react-hook-form';
+
+import Link from 'next/link';
+import BackButton from '../components/BackButton';
 
 export default function Page() {
+  const router = useRouter();
   const { handleSubmit, control } = useForm();
-  const onSubmit = (data: FieldValues) => {
-    createUser(data as CreateUserType);
+  const context = useContext(ToastContext);
+
+  const onSubmit = async (data: FieldValues) => {
+    try {
+      await createUser(data as CreateUserType);
+      context.toast.success('Votre compte a été créé avec succès');
+      router.push('/login');
+    } catch (error: any) {
+      console.error(error);
+      context.toast.error('Problème lors de la création de votre compte');
+    }
   };
 
   return (
-    <div className="h-full w-full flex flex-col justify-center items-center">
+    <main className="h-full w-full flex flex-col justify-center items-center">
+      <div className="absolute left-0 top-2">
+        <BackButton />
+      </div>
       <h1 className="text-5xl mb-10">S&apos;enregistrer</h1>
       <form
         className="flex flex-col items-center space-y-4 w-1/3"
@@ -22,14 +43,26 @@ export default function Page() {
           name="firstname"
           control={control}
           render={({ field }) => (
-            <Input required label="Prénom" type="text" {...field} />
+            <Input
+              data-test="firstname"
+              required
+              label="Prénom"
+              type="text"
+              {...field}
+            />
           )}
         />
         <Controller
           name="lastname"
           control={control}
           render={({ field }) => (
-            <Input required label="Nom" type="text" {...field} />
+            <Input
+              data-test="lastname"
+              required
+              label="Nom"
+              type="text"
+              {...field}
+            />
           )}
         />
         <Controller
@@ -46,8 +79,12 @@ export default function Page() {
             <Input required label="Mot de passe" type="password" {...field} />
           )}
         />
-        <Button>S&apos;enregistrer</Button>
+        <Link href="/login" className="transition-transform active:scale-95">
+          Vous avez déjà un compte ?{' '}
+          <span className="underline">Cliquez ici</span>
+        </Link>
+        <Button data-test="submit">S&apos;enregistrer</Button>
       </form>
-    </div>
+    </main>
   );
 }
