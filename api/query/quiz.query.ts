@@ -10,8 +10,8 @@ export const getQuiz = async (quizId: string) => {
   return data;
 };
 
-export const getQuizzes = async () => {
-  const data: QuizType[] = await API.get('/quiz');
+export const getQuizzes = async (): Promise<QuizType[]> => {
+  const { data } = await API.get('/quizzes');
   return data;
 };
 
