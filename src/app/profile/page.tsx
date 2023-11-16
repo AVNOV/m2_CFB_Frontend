@@ -36,7 +36,6 @@ export default function Page() {
             </>
           )}
         </div>
-        B
       </div>
     </main>
   );

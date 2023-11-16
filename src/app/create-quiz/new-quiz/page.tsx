@@ -10,9 +10,7 @@ export default function Page() {
   return (
     <div className="flex flex-col w-full h-full items-center justify-center relative">
       <p className="text-4xl mb-2  z-1">Félicitation !</p>
-      <p className="text-4xl mb-2 z-1">
-        Un Quiz de plus dans la quizothèque !{' '}
-      </p>
+      <p className="text-4xl mb-2 z-1">Un Quiz de plus dans la quizothèque !</p>
       <Lottie
         className="z-0 w-4/12"
         size={10}
