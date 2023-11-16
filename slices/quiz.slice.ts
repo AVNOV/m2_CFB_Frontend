@@ -19,9 +19,18 @@ export const QuizSlice = createSlice({
     updateNbCorrectAnswers: (state) => {
       state.nbCorrectAnswers += 1;
     },
+    resetQuiz: (state) => {
+      state.quiz = <QuizType>{};
+      state.currentQuestion = 0;
+      state.nbCorrectAnswers = 0;
+    },
   },
 });
 
-export const { updateQuiz, updateCurrentQuestion, updateNbCorrectAnswers } =
-  QuizSlice.actions;
+export const {
+  updateQuiz,
+  updateCurrentQuestion,
+  updateNbCorrectAnswers,
+  resetQuiz,
+} = QuizSlice.actions;
 export default QuizSlice.reducer;

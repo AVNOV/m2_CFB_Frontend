@@ -14,7 +14,7 @@ import { updateGame } from 'api/query/game.query';
 import Timer from '../Timer';
 import { useRouter } from 'next/navigation';
 
-interface TemplateProps {
+interface props {
   question: string;
   answers: AnswerType[];
   nbQuestions: number;
@@ -22,15 +22,20 @@ interface TemplateProps {
   gameId: number;
 }
 
-export default function QuizzTemplate(TemplateProps: TemplateProps) {
+export default function QuizzTemplate({
+  question,
+  answers,
+  currentQuestion,
+  nbQuestions,
+  gameId,
+}: props) {
   const router = useRouter();
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
-  const { question, answers, currentQuestion, nbQuestions, gameId } =
-    TemplateProps;
   const [isValidate, setIsValidate] = useState(false);
   const dispatch = useAppDispatch();
   const { nbCorrectAnswers } = useAppSelector((state) => state.quizSlice);
-  const [timeInSeconds, setTimeInSeconds] = useState(30);
+  const time = 10;
+  const [timeInSeconds, setTimeInSeconds] = useState(time);
 
   const handleCardChange = (id: string) => {
     setSelectedCard(id === selectedCard ? null : id);
@@ -49,13 +54,14 @@ export default function QuizzTemplate(TemplateProps: TemplateProps) {
     );
 
     if (currentQuestion + 1 === 10) router.push('/score');
-
-    setTimeout(() => {
-      setTimeInSeconds(30);
-      dispatch(updateCurrentQuestion());
-      setIsValidate(false);
-      setSelectedCard(null);
-    }, 2000);
+    else {
+      setTimeout(() => {
+        setTimeInSeconds(time);
+        dispatch(updateCurrentQuestion());
+        setIsValidate(false);
+        setSelectedCard(null);
+      }, 2000);
+    }
   };
 
   const handleValidate = async () => {
