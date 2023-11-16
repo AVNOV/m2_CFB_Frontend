@@ -102,7 +102,17 @@ export default function Page() {
       answers.forEach((answer) => {
         answer.questionId = createdQuestion.id;
       });
-      await Promise.all(answers.map((answer) => createAnswer(answer)));
+      await Promise.all(answers.map((answer) => createAnswer(answer))).then(
+        () => {
+          setQuestion({ ...question, title: '' });
+          setAnswerTrue({ ...answerTrue, title: '' });
+          setFalseAnswers([
+            { ...falseAnswers[0], title: '' },
+            { ...falseAnswers[1], title: '' },
+            { ...falseAnswers[2], title: '' },
+          ]);
+        },
+      );
     } catch (error) {
       console.error('Erreur lors de la création de la question', error);
     }
@@ -165,6 +175,25 @@ export default function Page() {
       <div className="flex flex-col p-4 w-full h-full pt-10 items-center">
         <p className="text-4xl mb-8">Créez votre quiz !</p>
 
+        <label htmlFor="theme" className="mt-5 mb-2">
+          Thème
+        </label>
+        <select
+          id="theme"
+          disabled={currentQuestionIndex > 0}
+          value={quizData.themeId}
+          onChange={handleThemeChange}
+          className={`border-2 focus:outline-orange-400 border-grey rounded-lg py-2 px-3 leading-tight border-solid bg-white text-black mb-4 ${
+            currentQuestionIndex > 0 ? 'opacity-50 bg-gray-50' : ''
+          }}`}
+        >
+          {themes.map((theme) => (
+            <option key={theme.id} value={theme.id}>
+              <p className="text-black">{theme.name}</p>
+            </option>
+          ))}
+        </select>
+
         <label htmlFor="quizTitle" className="mb-2">
           Titre du quiz
         </label>
@@ -178,26 +207,6 @@ export default function Page() {
             currentQuestionIndex > 0 ? 'opacity-50 bg-gray-50' : ''
           }}`}
         />
-
-        <label htmlFor="theme" className="mt-5 mb-2">
-          Thème
-        </label>
-        <select
-          id="theme"
-          disabled={currentQuestionIndex > 0}
-          value={quizData.themeId}
-          onChange={handleThemeChange}
-          className={`border-2 focus:outline-orange-400 border-grey rounded-lg py-2 px-3 leading-tight border-solid bg-white text-black ${
-            currentQuestionIndex > 0 ? 'opacity-50 bg-gray-50' : ''
-          }}`}
-        >
-          {themes.map((theme) => (
-            <option key={theme.id} value={theme.id}>
-              <p className="text-black">{theme.name}</p>
-            </option>
-          ))}
-        </select>
-
         <div className="w-full h-full flex flex-col items-center">
           <p className="mt-10 mb-2">Questions {currentQuestionIndex + 1}</p>
 
@@ -221,6 +230,15 @@ export default function Page() {
               <FalseAnswerInput
                 key={index}
                 index={index}
+                falseAnswer={falseAnswers[index]}
+                setFalseAnswer={(falseAnswer) => {
+                  setFalseAnswers([
+                    {
+                      ...falseAnswers[index],
+                      title: falseAnswer.title,
+                    },
+                  ]);
+                }}
                 onUpdate={handleFalseAnswerUpdate}
               />
             ))}
@@ -238,15 +256,17 @@ export default function Page() {
                 Ajouter la question
               </Button>
             )}
-            <Button
-              className="mt-5"
-              onClick={() => {
-                handleValidateQuiz();
-                router.push('/create-quiz/new-quiz');
-              }}
-            >
-              Valider le quiz
-            </Button>
+            {currentQuestionIndex > 0 && (
+              <Button
+                className="mt-5"
+                onClick={() => {
+                  handleValidateQuiz();
+                  router.push('/create-quiz/new-quiz');
+                }}
+              >
+                Valider le quiz
+              </Button>
+            )}
           </div>
         </div>
       </div>

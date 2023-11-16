@@ -1,22 +1,21 @@
 'use client';
-import { useState, ChangeEvent } from 'react';
+
+import { ChangeEvent } from 'react';
 import { CreateAnswerType } from 'types/AnswerTypes';
 
 interface FalseAnswerInputProps {
   index: number;
+  setFalseAnswer: (falseAnswer: CreateAnswerType) => void;
+  falseAnswer: CreateAnswerType;
   onUpdate: (updatedFalseAnswer: CreateAnswerType, index: number) => void;
 }
 
 const FalseAnswerInput: React.FC<FalseAnswerInputProps> = ({
   index,
   onUpdate,
+  setFalseAnswer,
+  falseAnswer,
 }) => {
-  const [falseAnswer, setFalseAnswer] = useState<CreateAnswerType>({
-    title: '',
-    questionId: 0,
-    rightAnswer: false,
-  });
-
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const updatedFalseAnswer: CreateAnswerType = {
       ...falseAnswer,
