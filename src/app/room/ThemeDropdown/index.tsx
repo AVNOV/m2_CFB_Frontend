@@ -1,5 +1,5 @@
 import { getThemes } from 'api/query/theme.query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ThemeType } from 'types/ThemeTypes';
 
 type props = {
@@ -18,12 +18,15 @@ export default function ThemeDropdown(props: props) {
     }
   };
 
-  if (themes.length === 0) {
-    fetchThemesData();
-  }
+  useEffect(() => {
+    if (themes.length === 0) {
+      fetchThemesData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const displayThemeOptions = themes.map((theme: ThemeType) => (
-    <option key={theme.id} value={theme.name}>
+    <option key={theme.id} value={theme.id}>
       {theme.name}
     </option>
   ));

@@ -15,13 +15,26 @@ import alien5 from '../../assets/images/aliens/alien5.json';
 import alien6 from '../../assets/images/aliens/alien6.json';
 import alien7 from '../../assets/images/aliens/alien7.json';
 import ThemeDropdown from './ThemeDropdown';
+import { useAppDispatch, useAppSelector } from 'store';
+import { addGame, addUser } from 'api/query/room.query';
+import { useRouter } from 'next/navigation';
+import { RoomType } from 'types/RoomTypes';
+import { update } from 'slices/auth.slice';
+import { updateQuiz } from 'slices/quiz.slice';
+import { getGame } from 'api/query/game.query';
+import { GameType } from 'types/GameTypes';
+import { UserType } from 'types/UserTypes';
 
 export default function Page() {
+  const router = useRouter();
+  const { user } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
   const { handleSubmit, control } = useForm();
-  const [theme, setTheme] = useState<string | null>(null);
+  const [theme, setTheme] = useState<number | null>(null);
+  const [roomCode, setRoomCode] = useState<string>(user.room.code);
   const [avatarIds, setAvatarIds] = useState<Array<number>>([0, 1, 2, 3]);
+  const [users, setUsers] = useState<UserType[]>([]);
   const avatars = [alien1, alien2, alien3, alien4, alien5, alien6, alien7];
-  const roomCode: string = 'AXYOMS';
 
   useEffect(() => {
     const newAvatarIds: Array<number> = [];
@@ -33,16 +46,37 @@ export default function Page() {
     setAvatarIds(newAvatarIds);
   }, []);
 
+  useEffect(() => {
+    if (user.room.users) {
+      setUsers(user.room.users);
+    }
+  }, [user]);
+
   const onSubmit = async (data: FieldValues) => {
-    console.log(data);
+    try {
+      const room: RoomType = await addUser(data.roomCode);
+      console.log(room);
+      dispatch(update({ ...user, room: room }));
+      setRoomCode(room.code);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const onThemeSelected = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setTheme(event.target.value);
+    setTheme(+event.target.value);
   };
 
-  const onGameBegin = () => {
-    console.log(theme);
+  const onGameBegin = async () => {
+    try {
+      const room: RoomType = await addGame(theme!);
+      const game: GameType = await getGame(room.game.id.toString());
+      dispatch(update({ ...user, room: { ...user.room, game: game } }));
+      dispatch(updateQuiz(game.quiz));
+      router.push(`/game?gameId=${game.id}`);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -54,23 +88,23 @@ export default function Page() {
       <div className="flex w-full px-5">
         <div className="w-3/4 grid grid-cols-2 grid-rows-2 gap-5">
           <PlayerCard
-            firstname="Prénom"
-            lastname="Nom"
+            firstname={users[0]?.firstname}
+            lastname={users[0]?.firstname}
             lottie={avatars[avatarIds[0]]}
           />
           <PlayerCard
-            firstname="Prénom"
-            lastname="Nom"
+            firstname={users[1]?.firstname}
+            lastname={users[1]?.firstname}
             lottie={avatars[avatarIds[1]]}
           />
           <PlayerCard
-            firstname="Prénom"
-            lastname="Nom"
+            firstname={users[2]?.firstname}
+            lastname={users[2]?.firstname}
             lottie={avatars[avatarIds[2]]}
           />
           <PlayerCard
-            firstname="Prénom"
-            lastname="Nom"
+            firstname={users[3]?.firstname}
+            lastname={users[3]?.firstname}
             lottie={avatars[avatarIds[3]]}
           />
         </div>
