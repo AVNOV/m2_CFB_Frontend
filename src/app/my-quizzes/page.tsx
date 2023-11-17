@@ -37,7 +37,7 @@ export default function Page() {
       </div>
       <div className="flex flex-col my-auto justify-center items-center">
         <h1 className="text-5xl mb-10">Mes Quiz</h1>
-        <div className="flex flex-row items-center space-y-4 w-1/3">
+        <div className="flex flex-row items-center  w-1/3">
           {quizzes.length === 0 ? (
             <p className="text-2xl mb-8">
               Vous n&apos;avez pas encore créé de quiz
@@ -48,10 +48,10 @@ export default function Page() {
                 quiz.questions?.length !== 0 && (
                   <div
                     key={quiz.id}
-                    className="flex flex-col w-full h-full items-center justify-center"
+                    className="flex flex-col flex-wrap w-full h-full mr-4 items-center justify-between p-2 bg-orange-400 rounded-md"
                   >
-                    <p className="text-2xl mb-2">{quiz.title}</p>
-                    <p className="text-2xl mb-2">
+                    <p className="text-2xl">{quiz.title}</p>
+                    <p className="text-2xl">
                       {quiz.questions.length}{' '}
                       {`${
                         quiz.questions.length <= 1 ? 'question' : 'questions'
