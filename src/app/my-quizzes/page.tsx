@@ -9,6 +9,7 @@ import { QuizType } from 'types/QuizTypes';
 
 export default function Page() {
   const router = useRouter();
+  const [fetch, isFetching] = useState(false);
   const [quizzes, setQuizzes] = useState<QuizType[]>([]);
 
   const fetchQuizzesData = async () => {
@@ -20,8 +21,9 @@ export default function Page() {
     }
   };
 
-  if (quizzes.length === 0) {
+  if (quizzes.length === 0 && !fetch) {
     fetchQuizzesData();
+    isFetching(true);
   }
 
   return (
@@ -34,21 +36,33 @@ export default function Page() {
         />
       </div>
       <div className="flex flex-col my-auto justify-center items-center">
-        <h1 className="text-5xl mb-10">Mes informations</h1>
-        <div className="flex flex-col items-center space-y-4 w-1/3">
+        <h1 className="text-5xl mb-10">Mes Quiz</h1>
+        <div className="flex flex-row items-center  w-1/3">
           {quizzes.length === 0 ? (
             <p className="text-2xl mb-8">
               Vous n&apos;avez pas encore créé de quiz
             </p>
           ) : (
-            quizzes.map((quiz) => (
-              <div
-                key={quiz.id}
-                className="flex flex-col w-full h-full items-center justify-center"
-              >
-                <p className="text-2xl mb-8">{quiz.title}</p>
-              </div>
-            ))
+            quizzes.map(
+              (quiz) =>
+                quiz.questions?.length !== 0 && (
+                  <div
+                    key={quiz.id}
+                    className="flex flex-col flex-wrap w-full h-full mr-4 items-center justify-between p-2 bg-orange-400 rounded-md"
+                  >
+                    <p className="text-2xl">{quiz.title}</p>
+                    <p className="text-2xl">
+                      {quiz.questions.length}{' '}
+                      {`${
+                        quiz.questions.length <= 1 ? 'question' : 'questions'
+                      }`}
+                    </p>
+                    <p className="text-2xl">
+                      Quiz joué {quiz.games?.length} fois !
+                    </p>
+                  </div>
+                ),
+            )
           )}
         </div>
       </div>

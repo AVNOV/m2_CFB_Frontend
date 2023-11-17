@@ -1,5 +1,5 @@
 import API from '../API';
-import { CreateUserType } from '../../types/UserTypes';
+import { CreateUserType, UpdateUser } from '../../types/UserTypes';
 import { UserType } from '../../types/UserTypes';
 
 export const loginRequest = async (email: string, password: string) => {
@@ -19,5 +19,10 @@ export const createUser = async (user: CreateUserType) => {
 
 export const getUser = async (userId: string) => {
   const data: UserType = await API.get(`/user/${userId}`);
+  return data;
+};
+
+export const updateUser = async (user: UpdateUser) => {
+  const data: UserType = await API.patch(`/user/${user.id}`, user);
   return data;
 };

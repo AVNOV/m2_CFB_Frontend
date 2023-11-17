@@ -53,7 +53,7 @@ export default function QuizzTemplate({
       currentQuestion + 1,
     );
 
-    if (currentQuestion + 1 === 10) router.push('/score');
+    if (currentQuestion + 1 === nbQuestions) router.push('/score');
     else {
       setTimeout(() => {
         setTimeInSeconds(time);

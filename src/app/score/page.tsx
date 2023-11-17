@@ -9,7 +9,9 @@ import Button from '../components/Button';
 import { useRouter } from 'next/navigation';
 
 export default function Page() {
-  const { nbCorrectAnswers } = useAppSelector((state) => state.quizSlice);
+  const { nbCorrectAnswers, currentQuestion } = useAppSelector(
+    (state) => state.quizSlice,
+  );
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -32,7 +34,9 @@ export default function Page() {
           <h1 className="text-5xl mb-4">Score</h1>
 
           <div className="bg-white p-4 rounded shadow-md">
-            <h2 className={`text-2xl text-black`}>{nbCorrectAnswers} / 10</h2>
+            <h2 className={`text-2xl text-black`}>
+              {nbCorrectAnswers} / {currentQuestion + 1}
+            </h2>
           </div>
         </div>
       </div>
