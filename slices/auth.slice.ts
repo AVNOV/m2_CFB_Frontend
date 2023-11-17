@@ -1,5 +1,6 @@
 'use client';
 import { createSlice } from '@reduxjs/toolkit';
+import { RoomType } from 'types/RoomTypes';
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -12,13 +13,14 @@ export const authSlice = createSlice({
       email: '',
       created_at: '',
       updated_at: '',
+      room: {} as RoomType,
     },
     access_token: '',
   },
   reducers: {
     update: (state, action) => {
       const newUser = {
-        ...action.payload.user,
+        ...action.payload,
         id: state.user.id,
         created_at: state.user.created_at,
         updated_at: state.user.updated_at,
@@ -42,6 +44,7 @@ export const authSlice = createSlice({
         email: '',
         created_at: '',
         updated_at: '',
+        room: {} as RoomType,
       };
       state.access_token = '';
       localStorage.removeItem('user');

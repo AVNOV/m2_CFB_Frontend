@@ -2,7 +2,7 @@ import API from '../API';
 import { GameType } from '../../types/GameTypes';
 
 export const getGame = async (gameId: string) => {
-  const data: GameType = await API.get(`/game/${gameId}`);
+  const { data } = await API.get(`/games/${gameId}`);
   return data;
 };
 
